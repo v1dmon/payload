@@ -2,7 +2,9 @@ package dmon
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/rs/zerolog"
 	"github.com/v1dmon/payload/common"
@@ -18,7 +20,14 @@ type NetworkGeneral struct {
 
 func NewNetworkGeneral(packet []string) (*NetworkGeneral, error) {
 	networkGeneral := NetworkGeneral{}
-	networkGeneral.Timestamp = packet[0] + " " + packet[1]
+	t, err := time.Parse(
+		"2006-01-02 15:04:05.000000000",
+		fmt.Sprintf("%s %s", packet[0], packet[1]),
+	)
+	if err != nil {
+		return nil, err
+	}
+	networkGeneral.Timestamp = t.Format(time.RFC3339)
 	networkGeneral.Type = string(NetworkType)
 	networkGeneral.SubType = string(NetworkGeneralSubType)
 	networkGeneral.SendIP = packet[2]
