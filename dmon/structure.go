@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/docker/docker/api/types"
-	zl "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog"
 	"github.com/v1dmon/payload/common"
 	"kythe.io/kythe/go/util/datasize"
 )
@@ -45,8 +45,8 @@ func (s *StructureHost) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureHost) Display() {
-	zl.Info().
+func (s *StructureHost) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).
@@ -84,8 +84,8 @@ func (s *StructureNetwork) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureNetwork) Display() {
-	zl.Info().
+func (s *StructureNetwork) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).
@@ -170,8 +170,8 @@ func (s *StructureContainer) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureContainer) Display() {
-	zl.Info().
+func (s *StructureContainer) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
-	zl "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog"
 	"github.com/v1dmon/payload/common"
 )
 
@@ -40,8 +40,8 @@ func (n *NetworkGeneral) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (n *NetworkGeneral) Display() {
-	zl.Info().
+func (n *NetworkGeneral) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", n.Timestamp).
 		Str("Type", n.Type).
 		Str("SubType", n.SubType).

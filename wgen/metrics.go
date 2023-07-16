@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	zl "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog"
 	vegeta "github.com/tsenart/vegeta/v12/lib"
 	"github.com/v1dmon/payload/common"
 )
@@ -53,8 +53,8 @@ func (n *HTTPMetrics) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (n *HTTPMetrics) Display() {
-	zl.Info().
+func (n *HTTPMetrics) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", n.Timestamp).
 		Str("Type", n.Type).
 		Str("SubType", n.SubType).

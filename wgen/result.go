@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	zl "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog"
 	vegeta "github.com/tsenart/vegeta/v12/lib"
 	"github.com/v1dmon/payload/common"
 )
@@ -52,8 +52,8 @@ func (n *HTTPResult) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (n *HTTPResult) Display() {
-	zl.Info().
+func (n *HTTPResult) Display(l *zerolog.Logger) {
+	l.Info().
 		Str("Timestamp", n.Timestamp).
 		Str("Type", n.Type).
 		Str("SubType", n.SubType).
