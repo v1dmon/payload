@@ -1,13 +1,15 @@
 package dmon
 
 import (
+	"encoding/json"
 	"strconv"
 
 	zl "github.com/rs/zerolog/log"
+	"github.com/v1dmon/payload/common"
 )
 
 type NetworkGeneral struct {
-	Header
+	common.Header
 	SendIP    string  `json:"SendIP"`
 	RecvIP    string  `json:"RecvIP"`
 	Protocol  string  `json:"Protocol"`
@@ -31,7 +33,11 @@ func NewNetworkGeneral(packet []string) (*NetworkGeneral, error) {
 }
 
 func (n *NetworkGeneral) Marshal() ([]byte, error) {
-	return marshal(n)
+	enc, err := json.Marshal(n)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (n *NetworkGeneral) Display() {

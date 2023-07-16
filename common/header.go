@@ -1,4 +1,4 @@
-package wgen
+package common
 
 type Header struct {
 	Timestamp string `json:"Timestamp"`

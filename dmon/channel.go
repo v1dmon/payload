@@ -1,9 +1,10 @@
 package dmon
 
-type Channel string
+import (
+	"github.com/v1dmon/payload/common"
+)
 
 const (
-	NetworkChannel   Channel = "dmon_network_out"
-	StructureChannel Channel = "dmon_structure_out"
-	MergedChannel    Channel = "dmon_merged_out"
+	NetworkChannel   common.Channel = "dmon_network_out"
+	StructureChannel common.Channel = "dmon_structure_out"
 )

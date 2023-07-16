@@ -1,17 +1,17 @@
 package dmon
 
-type PayloadType string
-
-const (
-	NetworkType   PayloadType = "network"
-	StructureType PayloadType = "structure"
+import (
+	"github.com/v1dmon/payload/common"
 )
 
-type payloadSubType string
+const (
+	NetworkType   common.PayloadType = "network"
+	StructureType common.PayloadType = "structure"
+)
 
 const (
-	NetworkGeneralSubType     payloadSubType = "general"
-	StructureHostSubType      payloadSubType = "host"
-	StructureNetworkSubType   payloadSubType = "network"
-	StructureContainerSubType payloadSubType = "container"
+	NetworkGeneralSubType     common.PayloadSubType = "general"
+	StructureHostSubType      common.PayloadSubType = "host"
+	StructureNetworkSubType   common.PayloadSubType = "network"
+	StructureContainerSubType common.PayloadSubType = "container"
 )

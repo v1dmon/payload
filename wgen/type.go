@@ -1,14 +1,14 @@
 package wgen
 
-type PayloadType string
-
-const (
-	HttpType PayloadType = "http"
+import (
+	"github.com/v1dmon/payload/common"
 )
 
-type PayloadSubType string
+const (
+	HttpType common.PayloadType = "http"
+)
 
 const (
-	HttpResultSubType  PayloadSubType = "result"
-	HttpMetricsSubType PayloadSubType = "metrics"
+	HttpResultSubType  common.PayloadSubType = "result"
+	HttpMetricsSubType common.PayloadSubType = "metrics"
 )

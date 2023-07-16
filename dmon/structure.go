@@ -1,16 +1,18 @@
 package dmon
 
 import (
+	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/docker/docker/api/types"
 	zl "github.com/rs/zerolog/log"
+	"github.com/v1dmon/payload/common"
 	"kythe.io/kythe/go/util/datasize"
 )
 
 type StructureHost struct {
-	Header
+	common.Header
 	OperatingSystem string `json:"OperatingSystem"`
 	OSType          string `json:"OSType"`
 	Architecture    string `json:"Architecture"`
@@ -36,7 +38,11 @@ func NewStructureHost(host *types.Info) *StructureHost {
 }
 
 func (s *StructureHost) Marshal() ([]byte, error) {
-	return marshal(s)
+	enc, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (s *StructureHost) Display() {
@@ -55,7 +61,7 @@ func (s *StructureHost) Display() {
 }
 
 type StructureNetwork struct {
-	Header
+	common.Header
 	ID   string `json:"ID"`
 	Name string `json:"Name"`
 }
@@ -71,7 +77,11 @@ func NewStructureNetwork(network *types.NetworkResource) *StructureNetwork {
 }
 
 func (s *StructureNetwork) Marshal() ([]byte, error) {
-	return marshal(s)
+	enc, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (s *StructureNetwork) Display() {
@@ -85,7 +95,7 @@ func (s *StructureNetwork) Display() {
 }
 
 type StructureContainer struct {
-	Header
+	common.Header
 	ID          string                                 `json:"ID"`
 	Name        string                                 `json:"Name"`
 	Image       string                                 `json:"Image"`
@@ -153,7 +163,11 @@ func NewStructureContainer(
 }
 
 func (s *StructureContainer) Marshal() ([]byte, error) {
-	return marshal(s)
+	enc, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (s *StructureContainer) Display() {

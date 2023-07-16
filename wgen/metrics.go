@@ -1,14 +1,16 @@
 package wgen
 
 import (
+	"encoding/json"
 	"time"
 
 	zl "github.com/rs/zerolog/log"
 	vegeta "github.com/tsenart/vegeta/v12/lib"
+	"github.com/v1dmon/payload/common"
 )
 
 type HTTPMetrics struct {
-	Header
+	common.Header
 	Latencies  vegeta.LatencyMetrics `json:"latencies"`  // request latency metrics
 	BytesIn    vegeta.ByteMetrics    `json:"bytes_in"`   // incoming byte metrics
 	BytesOut   vegeta.ByteMetrics    `json:"bytes_out"`  // outgoing byte metrics
@@ -44,7 +46,11 @@ func NewHTTPMetrics(metrics *vegeta.Metrics) (*HTTPMetrics, error) {
 }
 
 func (n *HTTPMetrics) Marshal() ([]byte, error) {
-	return marshal(n)
+	enc, err := json.Marshal(n)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (n *HTTPMetrics) Display() {

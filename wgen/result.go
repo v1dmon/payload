@@ -1,15 +1,17 @@
 package wgen
 
 import (
+	"encoding/json"
 	"net/http"
 	"time"
 
 	zl "github.com/rs/zerolog/log"
 	vegeta "github.com/tsenart/vegeta/v12/lib"
+	"github.com/v1dmon/payload/common"
 )
 
 type HTTPResult struct {
-	Header
+	common.Header
 	Attack   string        `json:"attack"`    // attack string
 	Seq      uint64        `json:"seq"`       // packet sequence number
 	Code     uint16        `json:"code"`      // http code
@@ -43,7 +45,11 @@ func NewHTTPResult(result *vegeta.Result) (*HTTPResult, error) {
 }
 
 func (n *HTTPResult) Marshal() ([]byte, error) {
-	return marshal(n)
+	enc, err := json.Marshal(n)
+	if err != nil {
+		return nil, err
+	}
+	return enc, nil
 }
 
 func (n *HTTPResult) Display() {

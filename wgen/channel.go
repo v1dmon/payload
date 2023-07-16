@@ -1,9 +1,10 @@
 package wgen
 
-type Channel string
+import (
+	"github.com/v1dmon/payload/common"
+)
 
 const (
-	ResultsChannel Channel = "wgen_results_out"
-	MetricsChannel Channel = "wgen_metrics_out"
-	MergedChannel  Channel = "wgen_merged_out"
+	ResultsChannel common.Channel = "wgen_results_out"
+	MetricsChannel common.Channel = "wgen_metrics_out"
 )
