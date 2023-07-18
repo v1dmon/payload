@@ -53,8 +53,8 @@ func (n *HTTPMetrics) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (n *HTTPMetrics) Display(l *zerolog.Logger) {
-	l.Info().
+func (n *HTTPMetrics) Display(e func() *zerolog.Event) {
+	e().
 		Str("Timestamp", n.Timestamp).
 		Str("Type", n.Type).
 		Str("SubType", n.SubType).

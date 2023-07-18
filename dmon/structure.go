@@ -45,8 +45,8 @@ func (s *StructureHost) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureHost) Display(l *zerolog.Logger) {
-	l.Info().
+func (s *StructureHost) Display(e func() *zerolog.Event) {
+	e().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).
@@ -84,8 +84,8 @@ func (s *StructureNetwork) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureNetwork) Display(l *zerolog.Logger) {
-	l.Info().
+func (s *StructureNetwork) Display(e func() *zerolog.Event) {
+	e().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).
@@ -170,8 +170,8 @@ func (s *StructureContainer) Marshal() ([]byte, error) {
 	return enc, nil
 }
 
-func (s *StructureContainer) Display(l *zerolog.Logger) {
-	l.Info().
+func (s *StructureContainer) Display(e func() *zerolog.Event) {
+	e().
 		Str("Timestamp", s.Timestamp).
 		Str("Type", s.Type).
 		Str("SubType", s.SubType).

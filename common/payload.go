@@ -6,5 +6,5 @@ import (
 
 type Payload interface {
 	Marshal() ([]byte, error)
-	Display(*zerolog.Logger)
+	Display(func() *zerolog.Event)
 }
