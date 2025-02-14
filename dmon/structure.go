@@ -96,12 +96,10 @@ func (s *StructureNetwork) Display(e func() *zerolog.Event) {
 
 type StructureContainer struct {
 	common.Header
-	ID          string                                 `json:"ID"`
-	Name        string                                 `json:"Name"`
-	Image       string                                 `json:"Image"`
-	Stats       StructureContainerStats                `json:"Stats"`
-	Locale      string                                 `json:"Locale"`
-	Timezone    string                                 `json:"Timezone"`
+	ID    string                  `json:"ID"`
+	Name  string                  `json:"Name"`
+	Image string                  `json:"Image"`
+	Stats StructureContainerStats `json:"Stats"`
 	IPAddresses map[string]string                      `json:"IPAddresses"`
 	Ports       map[string][]StructureContainerNetwork `json:"Ports"`
 }
@@ -132,7 +130,6 @@ func NewStructureContainer(
 	container *types.Container,
 	containerJSONBase *types.ContainerJSONBase,
 	containerStats *StructureContainerStats,
-	locale, timezone string,
 ) *StructureContainer {
 	structureContainer := StructureContainer{}
 	structureContainer.Timestamp = time.Now().UTC().Format(time.RFC3339)
@@ -144,8 +141,6 @@ func NewStructureContainer(
 	structureContainer.Stats = *containerStats
 	structureContainer.IPAddresses = make(map[string]string)
 	structureContainer.Ports = make(map[string][]StructureContainerNetwork)
-	structureContainer.Locale = locale
-	structureContainer.Timezone = timezone
 	for network, info := range container.NetworkSettings.Networks {
 		structureContainer.IPAddresses[network] = info.IPAddress
 	}
@@ -178,8 +173,6 @@ func (s *StructureContainer) Display(e func() *zerolog.Event) {
 		Str("ID", s.ID[:16]).
 		Str("Name", s.Name).
 		Str("Image", s.Image[:16]).
-		Str("Locale", s.Locale).
-		Str("Timezone", s.Timezone).
 		Str("CpuUsage", s.Stats.CPUPercUsage).
 		Str("MemoryUsage", s.Stats.MemoryPercUsage).
 		Str("NetworkUsage(rx/tx)", fmt.Sprintf("%s/%s", btos(s.Stats.NetworkRxRaw), btos(s.Stats.NetworkTxRaw))).

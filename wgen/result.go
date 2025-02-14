@@ -2,7 +2,7 @@ package wgen
 
 import (
 	"encoding/json"
-	"net/http"
+	// "net/http"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -19,10 +19,8 @@ type HTTPResult struct {
 	BytesIn  uint64        `json:"bytes_in"`  // rx bytes
 	BytesOut uint64        `json:"bytes_out"` // tx bytes
 	Error    string        `json:"error"`     // error reason
-	Body     []byte        `json:"body"`      // http body
 	Method   string        `json:"method"`    // http method
 	URL      string        `json:"url"`       // target url
-	Headers  http.Header   `json:"headers"`   // http headers
 }
 
 func NewHTTPResult(result *vegeta.Result) (*HTTPResult, error) {
@@ -37,10 +35,8 @@ func NewHTTPResult(result *vegeta.Result) (*HTTPResult, error) {
 	httpResult.BytesIn = result.BytesIn
 	httpResult.BytesOut = result.BytesOut
 	httpResult.Error = result.Error
-	httpResult.Body = result.Body
 	httpResult.Method = result.Method
 	httpResult.URL = result.URL
-	httpResult.Headers = result.Headers
 	return &httpResult, nil
 }
 
